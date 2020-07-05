@@ -5,7 +5,7 @@ import Grid from './elements/Grid'
 import MovieThumb from './elements/MovieThumb'
 import LoadMoreBtn from './elements/LoadMoreBtn'
 import Spinner from './elements/Spinner'
-import {IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE} from './../config'
+import {IMAGE_BASE_URL, BACKDROP_SIZE, POSTER_SIZE, API_KEY, API_URL} from './../config'
 
 import { useHomeFetch} from './hooks/useHomeFetch'
 import NoImage from './images/no_image.jpg'
@@ -20,6 +20,15 @@ const Home = () => {
 
 
     const [searchTerm, setSearchTerm] = useState('');
+
+    const loadMoreMovies = () => {
+        const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${currentPage + 1}`;
+        const popularEndpoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${currentPage + 1}`;
+
+        const endpoint = searchTerm ? searchEndpoint : popularEndpoint;
+
+        fetchMovies(endpoint);
+    }
 
 
     if (error) return <div> Something went wrong ... </div>;
@@ -46,8 +55,8 @@ return (
                 />
             ))}
         </Grid>
-        <Spinner/>
-        <LoadMoreBtn/>
+        {loading && <Spinner/>}
+        <LoadMoreBtn text='Load More' callback = {loadMoreMovies}/>
 
     </>
 
