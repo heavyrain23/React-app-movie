@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import {API_URL, API_KEY} from './../../config'
+import {API_URL, API_KEY, POPULAR_BASE_URL} from './../../config'
 
 
 export const useHomeFetch = () => {
@@ -36,7 +36,7 @@ const isLoadMore = endpoint.search('page');
 }
 
 useEffect(() => {
-    fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+    fetchMovies(POPULAR_BASE_URL);
 }, [])
 
 return [{ state, loading, error}, fetchMovies];
