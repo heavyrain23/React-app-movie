@@ -8,8 +8,14 @@ import Actor from './elements/Actor';
 import Grid from './elements/Grid';
 import Spinner from './elements/Spinner';
 
+import {useMovieFetch} from './hooks/useMovieFetch'
 
-const Movie = ({movieId}) => (
+    
+const Movie = ({movieId}) => {
+    const [movie, loading, error] = useMovieFetch(movieId)
+    console.log(movie)
+
+    return (
     <>
         <Navigation />
         <MovieInfo />
@@ -20,6 +26,7 @@ const Movie = ({movieId}) => (
         <Spinner />
         
     </>
-)
+    )
+};
 
 export default Movie;

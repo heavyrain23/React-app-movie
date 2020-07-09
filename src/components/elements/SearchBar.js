@@ -9,7 +9,7 @@ const SearchBar = ({callback}) => {
 
     const doSearch = event => {
         const {value} = event.target;
-        debugger;
+       
         clearTimeout(timeOut.current);
         setState(value);
 
