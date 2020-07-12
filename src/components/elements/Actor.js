@@ -1,5 +1,6 @@
 import React from 'react'
 import NoImage from '../images/no_image.jpg'
+import PropTypes from 'prop-types'
 
 import {IMAGE_BASE_URL, POSTER_SIZE} from '../../config'
 import {StyledActor} from '../styles/StyledActor'
@@ -18,6 +19,10 @@ const Actor = ({actor}) => (
         <span className = 'actor-name'>{actor.name}</span>
         <span className = 'actor-charcter'>{actor.charter}</span>
     </StyledActor>
-)
+);
+
+Actor.propTypes = {
+    actor: PropTypes.string,
+}
 
 export default Actor;

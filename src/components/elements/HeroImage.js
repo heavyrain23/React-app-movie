@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyledHeroImage} from '../styles/StyledHeroImage';
+import PropTypes from 'prop-types'
 
 
 const HeroImage = ({image,title,text}) => (
@@ -12,8 +13,12 @@ const HeroImage = ({image,title,text}) => (
             </div>
         </div>
     </StyledHeroImage>
-
-
 )
+
+HeroImage.propTypes = {
+    image: PropTypes.string,
+    title: PropTypes.string,
+    text: PropTypes.string
+}
 
 export default HeroImage
