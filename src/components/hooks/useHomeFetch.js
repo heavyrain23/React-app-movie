@@ -1,8 +1,8 @@
 import React, {useState, useEffect } from 'react';
-import {API_URL, API_KEY, POPULAR_BASE_URL} from './../../config'
+import {POPULAR_BASE_URL} from './../../config'
 
 
-export const useHomeFetch = () => {
+export const useHomeFetch = searchTerm => {
 
 const [state, setState] = useState({ movies: []});
 const [loading,setLoading] = useState(false);
@@ -36,8 +36,22 @@ const isLoadMore = endpoint.search('page');
 }
 
 useEffect(() => {
-    fetchMovies(POPULAR_BASE_URL);
-}, [])
+    if (sessionStorage.homeState) {
+        setState(JSON.parse(sessionStorage.homeState)); 
+        setLoading(false);
+        } else {
+            fetchMovies(POPULAR_BASE_URL);
+        }
+    }, []);
+
+
+useEffect(() => {
+    if(!searchTerm) {
+        console.log('writting to sessionStorage')
+        sessionStorage.setItem('homeState', JSON.stringify(state));
+    }
+}, [searchTerm, state])
+
 
 return [{ state, loading, error}, fetchMovies];
 
